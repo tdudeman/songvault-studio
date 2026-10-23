@@ -42,3 +42,17 @@ Run `python -m http.server 8000` in the unzipped directory and visit `http://loc
 - Restores merge on internal song IDs and don't deduplicate by title.
 - Not an official Suno application. Do not paste Suno auth cookies or private API keys into any front-end code.
 - Store sensitive unpublished material only if you are comfortable with device/browser-local storage.
+
+
+## Phase 3 (2026-10-23) — album and genre improvements
+
+- **Album covers:** Open Albums → Edit album → Choose image. PNG, JPEG and WebP images are cropped to a square, resized to 560×560 and converted locally to JPEG to reduce storage usage. Artwork is saved with album metadata and included in existing JSON and ZIP backups.
+- **Album details:** Open an album card to edit its description and release date, add a draft into the album, play included audio, and reorder tracks using the up/down arrows. Changes persist on device.
+- **Genre folders:** Genres displays genre → subgenre groups and albums. Use the folder button to open matching songs or an album name to open its details.
+- **Bulk cleanup:** Library → Select multiple also offers “Clear genre” and “Clear subgenre”. Apply changes is explicit; no automatic reclassification is performed.
+
+Privacy and compatibility: Phase 3 uses the same `songvault-studio-v1` IndexedDB database, the same `songs`, `albums` and `audio` stores, and the `songvault-v1` backup format. Albums gain optional `coverDataURL` and `releaseDate`; tracks gain optional `trackNo`. All remain backward-compatible. No files or saved data are uploaded to GitHub; only the open-source app code is hosted.
+
+**Reminder:** Browser storage is local to the exact web address/browser or installed app. A ZIP export remains the recommended way to safeguard the full library before clearing storage, switching browsers or devices, or making major changes.
+
+**Phase 3.1:** New drafts created directly inside an album automatically prefill that album's genre and subgenre; both fields can still be changed manually.
