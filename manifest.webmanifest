@@ -1,0 +1,38 @@
+{
+  "id": "./",
+  "name": "SongVault Studio",
+  "short_name": "SongVault",
+  "description": "Private, offline-first music library and song draft studio",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d0d14",
+  "theme_color": "#111019",
+  "orientation": "any",
+  "lang": "en",
+  "categories": [
+    "music",
+    "entertainment",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
