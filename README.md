@@ -1,43 +1,41 @@
-# SongVault Studio v4.0 — Playlists & Music Player
+# SongVault Studio — Phase 5: Song Creation Studio
 
-**Website:** https://tdudeman.github.io/songvault-studio/
+Free, offline-first, installable music library and song-drafting workspace, hosted at **https://tdudeman.github.io/songvault-studio/**.
 
-SongVault is an offline-first personal music library that stores local song metadata and imported audio in your browser's IndexedDB. **It has no Suno API connection, account sync, or cloud backup.** Its source code is public but your library is not uploaded to GitHub.
+## What's new in v5.0
 
-## What's new in v4.0
+- New creation studio view with six editable starting sounds (neon synth-pop, haunted carousel, dreamy electropop, Irish swing, cinematic ballad, melodic K-pop).
+- Copy **Lyrics**, **Styles**, and **Voice** individually from the draft editor; speech drafts can copy **Script**, **Tone**, and **Backing Music** independently. Copying works without saving first.
+- Copy an all-in-one creative brief, or download a plain-text brief file to keep outside the browser.
+- Instrumental toggle (lyrics are preserved in the saved draft but excluded from the instrumental prompt).
+- Optional BPM, musical key, time signature, and excluded styles.
+- Lyric section insertion tools (Intro, Verse, Chorus, Bridge, etc.) and live character counts.
+- Duplicate a draft without copying imported audio versions or modifying the source track.
 
-- Create, rename, and delete **playlists** without deleting their songs.
-- Add and remove tracks, including drafts without audio; reorder playlist songs.
-- Play a playlist or album, or start a filtered library queue. Playback defaults to the current selection and proceeds to later tracks with imported audio.
-- Player now has **Previous**, **Next**, **Shuffle upcoming**, **Repeat off/all/one**, and **Queue** controls.
-- Queue panel supports playing a specific queued track, moving tracks, removing tracks, and clearing the queue.
-- Add an individual song to any playlist or to the current queue from the Library.
-- Mobile background playback uses the browser audio element and Media Session controls when supported by Android Chrome. The operating system may interrupt playback; screen-off/background playback requires device testing.
-- Playlists are stored in a new IndexedDB object store. Existing song, album, and audio stores are preserved by an automatic database upgrade from v1 to v2, under the same database name `songvault-studio-v1`.
-- Complete ZIP and metadata JSON backups **include playlists**. Previous backup files (without a playlists field) can still be restored.
-- Version 4 service worker pre-caches the new player assets for offline UI use.
+## How to use
 
-## First run after updating
+1. Launch **Create** and choose a preset or start a blank **Song** or **Speech** draft.
+2. Add a title and edit lyrics/script, style, voice, tone, or backing-music instructions.
+3. Use the individual **Copy** controls to paste into the corresponding fields of Suno's creation screen. This app does not directly generate music.
+4. Save the draft. Imported audio versions can be attached to the saved track later from its editor.
+5. In **Backup**, export a **full ZIP** after any important edits. Metadata-only JSON excludes audio files.
 
-1. Open the existing app at https://tdudeman.github.io/songvault-studio/ and choose **Update app** if prompted. Verify that the app footer says `v4.0`.
-2. **Before importing or reorganizing anything, download a full ZIP backup** from Backup.
-3. Tap Playlists → New playlist, add some imported tracks, and press Play all.
-4. Test next/previous, repeat, shuffle, and the queue. Close and reopen the app to confirm the playlist persists.
-5. Check Android's system media controls while the app runs in the background. This varies by Android/browser power management.
+## Install / updates
 
-## Important storage and backup details
+Open the HTTPS website on Android Chrome. Chrome's menu offers **Install app** when supported. An existing installed version receives app updates after the service worker refreshes. The database persists at the *same origin* (`tdudeman.github.io` with `/songvault-studio/`). If moving browsers/devices or changing origin, use a ZIP backup.
 
-- Audio and metadata are stored **per device and browser origin**. SongVault doesn't sync across phones, computers, or Suno.
-- Do not clear Chrome site data for this app before making a ZIP backup.
-- A metadata-only JSON export includes playlists and library catalog information, **not audio**.
-- The full ZIP includes audio blobs alongside metadata. Large backups may consume substantial RAM/storage and should be tested with small sets first.
-- Your Suno songs need to be downloaded and imported manually until an authorized integration exists.
-- Existing songs, album artwork, album track ordering, lyrics, descriptions, and genre organization are retained.
+## Data compatibility
 
-## Deployment
+This release keeps IndexedDB database **`songvault-studio-v1`**, its version **2**, and its existing `songs`, `albums`, `audio`, and `playlists` stores. New creation settings are optional fields on existing song records, and the original `songvault-v1` full ZIP/JSON formats remain compatible. Existing albums, playlists, songs, and imported audio should be retained on upgrades on the same origin. Make a backup before editing or using a new version.
 
-Commit `index.html`, `phase3.js`, `phase3.css`, `phase4.js`, `phase4.css`, `sw.js`, `manifest.webmanifest`, `.nojekyll`, and the `icons/` folder to a GitHub repository. Enable Pages from the default branch/root. The site is a static PWA; no paid server is needed.
+## Privacy / security
 
-## Validation
+- No Suno API access, Suno login, automatic song generation, account synchronization, or third-party scripts.
+- Your songs and drafts are stored only in **your browser's IndexedDB**, not on GitHub. The public GitHub repository contains source code and app assets only.
+- Browser storage can be cleared by your browser/device. **Backups are required** to protect your work.
+- Installed app background music depends on device/browser support; this release does not modify the Phase 4 music player.
+- No remote hosting of music/audio files, and no Google account sign-in.
 
-The inline app JavaScript and all standalone scripts pass `node --check`; PWA paths and ZIP structure were checked. Local browser navigation was blocked by the testing environment's administrator policy, so Android device behavior still requires real-world testing. GitHub Pages availability can be independently verified after deployment.
+## Source structure
+
+`index.html` + Phase 3–5 CSS/JS + `sw.js` + static icons/manifest. No build tools required; published via GitHub Pages `main` branch root.
