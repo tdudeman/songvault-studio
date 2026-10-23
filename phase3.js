@@ -119,7 +119,7 @@ document.addEventListener('click',async e=>{
  try{
   if(actionName==='open-album'){activeAlbum=el.dataset.id;state.view='albums';render();window.scrollTo(0,0);}
   else if(actionName==='back-to-albums'){activeAlbum='';render();}
-  else if(actionName==='add-to-album'){songEditor();const target=$('#fAlbum');if(target)target.value=el.dataset.id;}
+  else if(actionName==='add-to-album'){songEditor();const target=$('#fAlbum');if(target)target.value=el.dataset.id;const album=state.albums.find(a=>a.id===el.dataset.id);if(album){if($('#fGenre')&&!$('#fGenre').value)$('#fGenre').value=album.genre||'';if($('#fSubgenre')&&!$('#fSubgenre').value)$('#fSubgenre').value=album.subgenre||'';}}
   else if(actionName==='move-track')await moveTrack(el.dataset.id,Number(el.dataset.direction));
   else if(actionName==='remove-album-cover'){pendingCover=null;updateCover();}
  }catch(err){console.error(err);toast('Unable to complete action: '+err.message);}
