@@ -10,6 +10,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="description" content="Private offline-first song library, albums, lyric drafts and Suno-ready prompts.">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="phase3.css">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 <title>SongVault Studio · Offline Music Library</title>
 <style>
@@ -33,7 +34,7 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uuid=()=>crypto.randomUUID?crypto.randomUUID():'id-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
 const now=()=>new Date().toISOString();
-const APP_VERSION='2.0';
+const APP_VERSION='3.0';
 let deferredInstallPrompt=null;
 let waitingWorker=null;
 function isStandalone(){return matchMedia('(display-mode: standalone)').matches || !!navigator.standalone}
@@ -109,5 +110,6 @@ if('serviceWorker' in navigator&&['https:','http:'].includes(location.protocol))
   }).catch(e=>console.warn('Offline cache not available',e));
 }
 </script>
+<script src="phase3.js" defer></script>
 </body>
 </html>
