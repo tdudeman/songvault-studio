@@ -1,0 +1,37 @@
+/* SongVault Phase 5 · mobile-first song creation */
+.sv5-intro .top{margin-bottom:8px}
+.sv5-sectionhead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:27px 0 14px}
+.sv5-sectionhead h2{font-size:19px;margin:0}
+.sv5-sectionhead p,.sv5-sectionhead span{font-size:13px;color:var(--muted);margin:5px 0 0}
+.sv5-preset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.sv5-preset{display:flex;align-items:center;gap:11px;background:linear-gradient(140deg,#242030,#191824);border:1px solid #40364b;border-radius:15px;padding:14px;min-height:83px}
+.sv5-preset-icon{display:grid;place-items:center;width:43px;height:43px;flex:none;border-radius:12px;background:#483550;font-size:23px}
+.sv5-preset-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
+.sv5-preset-info b{font-size:14px}
+.sv5-preset-info span{font-size:11px;color:var(--muted)}
+.sv5-preset .btn{flex:none}
+.sv5-editor-pane{padding:14px;margin:3px 0 18px;background:linear-gradient(155deg,#232132,#191822);border:1px solid #43354c;border-radius:15px}
+.sv5-editor-title h3{font-size:17px;margin:0 0 5px}
+.sv5-editor-title p{font-size:12px;color:var(--muted);margin:0 0 12px}
+.sv5-editor-pane .field label{font-size:12px}
+.sv5-toprow{display:flex;align-items:end;gap:10px}
+.sv5-toprow .field{flex:1;min-width:0}
+.sv5-toprow .btn{height:40px;white-space:nowrap}
+.sv5-toggle{display:flex;gap:10px;align-items:flex-start;padding:12px;margin:14px 0;border:1px solid #534158;background:#2c2538;border-radius:12px;cursor:pointer}
+.sv5-toggle input{margin-top:4px;width:17px;height:17px;accent-color:#bc90ee}
+.sv5-toggle span{display:flex;flex-direction:column;gap:4px}
+.sv5-toggle b{font-size:13px}
+.sv5-toggle small{color:var(--muted);font-size:11px}
+.sv5-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sv5-fields .field{min-width:0}
+.sv5-fields select,.sv5-fields input{width:100%}
+.sv5-muted{opacity:.53}
+.sv5-toolbar{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 8px}
+.sv5-toolbar .btn{font-size:12px}
+.sv5-count{font-size:12px;color:var(--muted);margin:8px 0 12px}
+.sv5-lyric-tools{border-top:1px solid #423b4d;padding-top:12px;margin-top:12px}
+.sv5-lyric-tools b{display:block;font-size:12px;margin-bottom:8px}
+.sv5-lyric-tools>div{display:flex;gap:6px;flex-wrap:wrap}
+.sv5-lyric-tools .btn{font-size:11px;padding:6px 9px}
+#modalFoot{flex-wrap:wrap}
+@media(max-width:680px){.sv5-preset-grid{grid-template-columns:1fr}.sv5-fields{grid-template-columns:1fr}.sv5-toprow{flex-direction:column;align-items:stretch}.sv5-toprow .btn{width:100%}.sv5-toolbar .btn{flex:1 1 auto}.sv5-sectionhead{align-items:start}.sv5-editor-pane{padding:11px}}
