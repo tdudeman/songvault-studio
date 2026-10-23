@@ -34,7 +34,7 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uuid=()=>crypto.randomUUID?crypto.randomUUID():'id-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
 const now=()=>new Date().toISOString();
-const APP_VERSION='3.0';
+const APP_VERSION='3.1';
 let deferredInstallPrompt=null;
 let waitingWorker=null;
 function isStandalone(){return matchMedia('(display-mode: standalone)').matches || !!navigator.standalone}
