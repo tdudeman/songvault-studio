@@ -1,58 +1,43 @@
-# SongVault Studio — Phase 2 / Installable Web App
+# SongVault Studio v4.0 — Playlists & Music Player
 
-SongVault is a **local-first song library** with album/genre organization, playback, multiple versions, lyrics, style/voice drafts, Song/Speech workbench, and backup/restore. Official Suno integration is **not yet available**.
+**Website:** https://tdudeman.github.io/songvault-studio/
 
-## What is new in Phase 2
+SongVault is an offline-first personal music library that stores local song metadata and imported audio in your browser's IndexedDB. **It has no Suno API connection, account sync, or cloud backup.** Its source code is public but your library is not uploaded to GitHub.
 
-- Complete installable PWA files: `manifest.webmanifest`, icons for Android and desktop, and `sw.js` offline caching.
-- Works under a project subdirectory such as `/SongVault-Studio/` on GitHub Pages. All application resources use relative URLs.
-- App-install button with platform-specific instructions.
-- Browser storage estimate, request for persistent storage, online/offline connection status, and update notice.
-- Preserves Phase 1's IndexedDB database name `songvault-studio-v1` **on the same origin**, so existing data remains.
-- No API keys, authentication, server-side code, analytics, trackers or remote music access.
+## What's new in v4.0
 
-## Publish for free on GitHub Pages
+- Create, rename, and delete **playlists** without deleting their songs.
+- Add and remove tracks, including drafts without audio; reorder playlist songs.
+- Play a playlist or album, or start a filtered library queue. Playback defaults to the current selection and proceeds to later tracks with imported audio.
+- Player now has **Previous**, **Next**, **Shuffle upcoming**, **Repeat off/all/one**, and **Queue** controls.
+- Queue panel supports playing a specific queued track, moving tracks, removing tracks, and clearing the queue.
+- Add an individual song to any playlist or to the current queue from the Library.
+- Mobile background playback uses the browser audio element and Media Session controls when supported by Android Chrome. The operating system may interrupt playback; screen-off/background playback requires device testing.
+- Playlists are stored in a new IndexedDB object store. Existing song, album, and audio stores are preserved by an automatic database upgrade from v1 to v2, under the same database name `songvault-studio-v1`.
+- Complete ZIP and metadata JSON backups **include playlists**. Previous backup files (without a playlists field) can still be restored.
+- Version 4 service worker pre-caches the new player assets for offline UI use.
 
-1. Sign in to **github.com** and create a **new PUBLIC repository** called `songvault-studio` (you can pick another repository name). GitHub Free Pages requires public source code. Do **not** upload any downloaded music, backups, private lyrics, credentials or API tokens.
-2. Select **Add file → Upload files**, then upload **the CONTENTS of this extracted folder** to the repository root: `index.html`, `manifest.webmanifest`, `sw.js`, `.nojekyll`, `icons/` and `README.md`. Keep the `icons` subfolder intact. If browser upload won't select a folder, use GitHub Desktop or upload the ZIP contents through your computer. Do NOT upload just the ZIP.
-3. In the repo go to **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main, folder: /(root) → Save**.
-4. GitHub will provide your site URL, usually `https://YOUR-USERNAME.github.io/songvault-studio/`. Open that URL on Android Chrome.
-5. Tap ⋮ → **Install app** / **Add to Home screen**. The app is usable offline after its first successful online load.
-6. In SongVault, open **Backup** and run **Download full backup** after adding audio or drafts.
+## First run after updating
 
-**Important:** The Pages site is publicly reachable. Only the code is served by GitHub; your songs, lyrics, albums and imported audio stay in IndexedDB on the device and browser origin. There is **no cloud sync**.
+1. Open the existing app at https://tdudeman.github.io/songvault-studio/ and choose **Update app** if prompted. Verify that the app footer says `v4.0`.
+2. **Before importing or reorganizing anything, download a full ZIP backup** from Backup.
+3. Tap Playlists → New playlist, add some imported tracks, and press Play all.
+4. Test next/previous, repeat, shuffle, and the queue. Close and reopen the app to confirm the playlist persists.
+5. Check Android's system media controls while the app runs in the background. This varies by Android/browser power management.
 
-## Migrating your existing Phase 1 library
+## Important storage and backup details
 
-- If updating the existing files on the **same browser origin and URL**, the same IndexedDB database is reused.
-- If moving from `file://` or `localhost` to GitHub Pages, those are different origins, so the old library will NOT appear automatically. At the old location, choose **Backup → Download full backup** to get a ZIP. At the new hosted site, **Backup → Restore from file** and select the ZIP.
-- If switching phones or browsers, transfer the ZIP yourself and restore. Audio is included in a full ZIP, **not** in a metadata-only JSON.
+- Audio and metadata are stored **per device and browser origin**. SongVault doesn't sync across phones, computers, or Suno.
+- Do not clear Chrome site data for this app before making a ZIP backup.
+- A metadata-only JSON export includes playlists and library catalog information, **not audio**.
+- The full ZIP includes audio blobs alongside metadata. Large backups may consume substantial RAM/storage and should be tested with small sets first.
+- Your Suno songs need to be downloaded and imported manually until an authorized integration exists.
+- Existing songs, album artwork, album track ordering, lyrics, descriptions, and genre organization are retained.
 
-## Test locally on desktop
+## Deployment
 
-Run `python -m http.server 8000` in the unzipped directory and visit `http://localhost:8000/`. Most modern browsers allow service workers on localhost even without HTTPS.
+Commit `index.html`, `phase3.js`, `phase3.css`, `phase4.js`, `phase4.css`, `sw.js`, `manifest.webmanifest`, `.nojekyll`, and the `icons/` folder to a GitHub repository. Enable Pages from the default branch/root. The site is a static PWA; no paid server is needed.
 
-## Limitations / safety
+## Validation
 
-- **No direct Suno API access**, song generation, account library imports, cloud backups, user login, payment integration, or remote syncing.
-- Genre/album assignments are only inside SongVault; they do not edit Suno albums or folders.
-- Offline mode requires an initial online load on a stable hosted address.
-- Browser storage can be removed by user action or device policies. Persistent storage permission is not a guarantee. Back up frequently.
-- Full ZIPs are uncompressed with standard ZIP limitations and can use significant memory/storage for large collections. Archive very large music collections in batches.
-- Restores merge on internal song IDs and don't deduplicate by title.
-- Not an official Suno application. Do not paste Suno auth cookies or private API keys into any front-end code.
-- Store sensitive unpublished material only if you are comfortable with device/browser-local storage.
-
-
-## Phase 3 (2026-10-23) — album and genre improvements
-
-- **Album covers:** Open Albums → Edit album → Choose image. PNG, JPEG and WebP images are cropped to a square, resized to 560×560 and converted locally to JPEG to reduce storage usage. Artwork is saved with album metadata and included in existing JSON and ZIP backups.
-- **Album details:** Open an album card to edit its description and release date, add a draft into the album, play included audio, and reorder tracks using the up/down arrows. Changes persist on device.
-- **Genre folders:** Genres displays genre → subgenre groups and albums. Use the folder button to open matching songs or an album name to open its details.
-- **Bulk cleanup:** Library → Select multiple also offers “Clear genre” and “Clear subgenre”. Apply changes is explicit; no automatic reclassification is performed.
-
-Privacy and compatibility: Phase 3 uses the same `songvault-studio-v1` IndexedDB database, the same `songs`, `albums` and `audio` stores, and the `songvault-v1` backup format. Albums gain optional `coverDataURL` and `releaseDate`; tracks gain optional `trackNo`. All remain backward-compatible. No files or saved data are uploaded to GitHub; only the open-source app code is hosted.
-
-**Reminder:** Browser storage is local to the exact web address/browser or installed app. A ZIP export remains the recommended way to safeguard the full library before clearing storage, switching browsers or devices, or making major changes.
-
-**Phase 3.1:** New drafts created directly inside an album automatically prefill that album's genre and subgenre; both fields can still be changed manually.
+The inline app JavaScript and all standalone scripts pass `node --check`; PWA paths and ZIP structure were checked. Local browser navigation was blocked by the testing environment's administrator policy, so Android device behavior still requires real-world testing. GitHub Pages availability can be independently verified after deployment.
