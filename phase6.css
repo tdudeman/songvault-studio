@@ -1,0 +1,36 @@
+/* SongVault Phase 6 — mobile-friendly import review and organizer */
+.sv6-block{margin:17px 0;padding:20px;border:1px solid var(--line);border-radius:17px;background:var(--pane)}
+.sv6-block h2{margin:0 0 7px;font-size:19px}
+.sv6-block p{font-size:13px;line-height:1.55}
+.sv6-sectiontop,.sv6-summary,.sv6-trackhead,.sv6-pages{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sv6-sectiontop span,.sv6-summary span{color:var(--muted);font-size:12px}
+.sv6-summary{background:#272136;border:1px solid #5c486b;border-radius:12px;padding:11px;flex-wrap:wrap;margin-bottom:12px}
+.sv6-summary b{color:white}
+.sv6-info{background:#22202d;border:1px solid #444056;border-radius:12px;padding:13px;font-size:12px;color:#cbc3d4;margin:12px 0;line-height:1.6}
+.sv6-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:end;margin:15px 0}
+.sv6-tools>button{grid-column:1/-1;justify-self:end}
+.sv6-tools .field>span{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}
+.sv6-track{background:#1e1b29;border:1px solid #41374b;border-radius:13px;padding:13px;margin:11px 0}
+.sv6-trackhead{margin-bottom:11px;align-items:start}
+.sv6-check{display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;font-weight:700}
+.sv6-check input,.sv6-suggestion input{width:17px;min-width:17px;accent-color:#db91bc}
+.sv6-check span{overflow-wrap:anywhere}
+.sv6-filesize{flex:none;font-size:10px;color:var(--muted);white-space:nowrap}
+.sv6-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:9px 0}
+.sv6-row label,.sv6-album-label{display:block;font-size:11px;color:#c1b9cc}
+.sv6-row input,.sv6-row select,.sv6-album-label select{margin-top:4px;font-size:13px;padding:9px}
+.sv6-note{color:#ab93c9}.sv6-warning{color:#ffb6a6;display:block;margin:2px 0 9px}
+.sv6-dupe{border-color:#96685a}
+.sv6-pages{margin:16px 0}.sv6-pages span{color:var(--muted);font-size:12px}
+.sv6-progress{color:#e0b0d8;font-size:12px;min-height:18px;margin-bottom:5px}
+.sv6-suggestlist{max-height:350px;overflow:auto;margin:14px 0}
+.sv6-suggestion{display:flex;gap:12px;align-items:center;border-bottom:1px solid #3d3647;padding:10px;cursor:pointer}
+.sv6-suggestion span{display:flex;flex-direction:column;gap:3px;min-width:0}
+.sv6-suggestion b{font-size:13px}.sv6-suggestion small{color:var(--muted);font-size:11px}
+.sv6-genregrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:9px;margin-top:12px}
+.sv6-genre{background:#282234;border:1px solid #4a3a57;border-radius:11px;color:white;text-align:left;padding:13px;display:flex;flex-direction:column;gap:6px}
+.sv6-genre small{color:#b2a9bc}
+@media(max-width:680px){.sv6-block{padding:13px}.sv6-tools{grid-template-columns:1fr 1fr}.sv6-tools .field:last-of-type{grid-column:1/-1}.sv6-tools button{width:100%}.sv6-row{grid-template-columns:1fr}.sv6-check{font-size:11px}.sv6-genregrid{grid-template-columns:1fr 1fr}}
+
+/* Seven main sections must remain accessible on narrow Android screens. */
+@media(max-width:820px){.mobile-nav{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.mobile-nav button{flex:1 0 54px;min-width:54px}.mobile-nav::-webkit-scrollbar{display:none}}
