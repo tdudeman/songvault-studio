@@ -21,9 +21,9 @@ def png(w, h, filename, maskable=False):
                 flag=(.49<X<.60 and .34<Y<.39)
                 if head or stem or flag:r,g,b=255,255,255
             row.extend((r,g,b,255))
-        rows.append(b"\\x00"+bytes(row))
+        rows.append(bytes([0])+bytes(row))
     def chunk(t,data):return struct.pack(">I",len(data))+t+data+struct.pack(">I",zlib.crc32(t+data)&0xffffffff)
-    content=b"\\x89PNG\\r\\n\\x1a\\n"+chunk(b"IHDR",struct.pack(">2I5B",w,h,8,6,0,0,0))+chunk(b"IDAT",zlib.compress(b"".join(rows),9))+chunk(b"IEND",b"")
+    content=bytes([137,80,78,71,13,10,26,10])+chunk(b"IHDR",struct.pack(">2I5B",w,h,8,6,0,0,0))+chunk(b"IDAT",zlib.compress(b"".join(rows),9))+chunk(b"IEND",b"")
     Path(filename).parent.mkdir(parents=True,exist_ok=True)
     Path(filename).write_bytes(content)
 png(192,192,"icons/icon-192.png")
