@@ -1,32 +1,41 @@
-# SongVault Studio v6.0
+# SongVault Studio — v9.0 (Phases 7–9)
 
-Offline-first, installable music library and songwriting workspace. [Open the app](https://tdudeman.github.io/songvault-studio/).
+**Live app:** https://tdudeman.github.io/songvault-studio/
 
-## Phase 6: Bulk import and organize
+Offline-first personal music organizer. All imported audio, song metadata, album covers, lyrics, and drafts remain in the device's browser IndexedDB. No Suno API access or account sync is required or implemented.
 
-- **Organize** tab: import multiple local audio files with a review step.
-- Parse `Artist - Title` filenames and let the user edit title, artist, genre, subgenre and album before importing.
-- Suggest genre/subgenre from explicitly named folders and saved descriptive text only; **no audio listening or AI music analysis**.
-- Warn about likely duplicates by filename and size. Flags are advisory; duplicate candidates are deselected by default and can be manually selected.
-- Review and apply suggested missing categories to existing songs without overwriting set values.
-- Song metadata and audio are saved atomically per imported track into the existing IndexedDB stores.
+## Phase 7 — Media metadata and alternate takes
 
-## Use
+- **Media** view shows imported audio versions and any measured durations.
+- **Scan missing durations** checks files already stored locally, one at a time. Unsupported formats or files with unavailable metadata are skipped, not modified.
+- Song editor lets you attach a separate per-song artwork image (cropped/compressed locally, with album artwork as fallback), rename takes, add version notes, and retain the original file and active version.
+- Audio durations are also captured when possible during playback.
 
-1. **Export a full ZIP backup** in Backup first.
-2. Open **Organize → Select audio files** (or folder if supported).
-3. Review track information and duplicate warnings. Select **Import**.
-4. Browse genres/albums or review additional suggested metadata.
+## Phase 8 — Discover and classify
 
-## Limitations
+- **Discover** view searches titles, artist, lyrics, styles, voice notes, album names, version notes and tags.
+- Filter results by genre, tag, media type, favorites, available audio, or draft status; sort by date/title/artist.
+- Favorite individual songs and add custom comma-separated tags in their editor. All metadata remains local.
+- Search results update as you type. Audio playback and add-to-playlist/queue functions continue to use the Phase 4 player.
 
-- Suno integration is not currently authorized. This app cannot download your Suno library directly.
-- Everything you import stays in this browser/device. Nothing is uploaded to GitHub. Clearing application/site data can erase the library.
-- Keep off-device full ZIP backups. Web storage quotas and codec playback support depend on browser/device.
-- Filename and file size comparisons are **not** a definitive or exhaustive duplicate scan.
-- Folder import and background playback support vary by browser.
-- The app reviews up to 500 supported audio files per batch; select more in additional batches.
+## Phase 9 — Library safety and portability
 
-## Technical
+- **Health** view runs a non-destructive IndexedDB audit for missing audio referenced by a song and unreferenced audio blobs.
+- Restore from ZIP or JSON now shows a **review screen** with song, album, playlist and audio counts and warns when matching song IDs would be overwritten. Restoring still merges by ID; keep a full backup first.
+- New CSV catalog export (metadata only, no audio) in addition to existing full ZIP and JSON exports.
+- `sv9Audit` reports approximate site-wide browser storage usage if the device exposes it.
 
-Static HTML, CSS and JavaScript, IndexedDB database `songvault-studio-v1` version 2, PWA manifest, cache-versioned service worker. Source assets `phase3.js` through `phase6.js` build progressively; no framework/server required for local functionality.
+## Updating and using on Android
+
+1. Open the **Backup** tab and download a **full ZIP backup** before updating.
+2. Open https://tdudeman.github.io/songvault-studio/, choose **Update app** if prompted, and confirm **v9.0** at the bottom of the sidebar.
+3. Visit **Media**, **Discover**, and **Health**. Try a version rename, favorite a track, filter it in Discover, and run a health audit.
+4. Test a **restore preview** with a recent ZIP, then **Cancel** rather than restoring during initial testing.
+
+## Security and limitations
+
+- No new IndexedDB schema version. New fields such as `tags`, `favorite`, `durationSec`, `artworkDataURL` and take notes are optional, preserving old records.
+- Media duration extraction depends on browser codec support. This is not audio/music genre analysis.
+- The ZIP backup format remains `songvault-v1`; JSON catalogs and CSV exports exclude audio files.
+- A completed browser storage write is not a substitute for an external backup. Clearing site data deletes local music.
+- This build does **not** sync libraries between devices or read/manage a Suno account.
